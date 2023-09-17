@@ -21,6 +21,14 @@ export default function TextForms (props) {
       props.show_alert("Your Text has been cleared","success");
     }
 
+    const handlecopyclick = ()=>{
+      var text = document.getElementById("myBox");
+      text.select();
+      navigator.clipboard.writeText(text.value);
+      document.getSelection().removeAllRanges();
+      props.show_alert("Your Text is Copied","success");
+    }
+
     const [text, setText] = useState('');
     //text = "new" wrong way to change the state....
   return (
@@ -33,6 +41,7 @@ export default function TextForms (props) {
         <button disabled={text.length === 0}className='btn btn-primary my-1' onClick={handleUPclick}>Convert To UpperCase</button>
         <button disabled={text.length === 0}className='btn btn-primary mx-2 my-1' onClick={handleLOWclick}>Convert To LowerCase</button>
         <button disabled={text.length === 0}className='btn btn-primary mx-1 my-1' onClick={handleclearclick}>Clear Text</button>
+        <button disabled={text.length === 0}className='btn btn-primary mx-1 my-1' onClick={handlecopyclick}>Copy Text</button>
     </div>
     <div className='container my-3'>
       <h2 style={{color : props.mode === "light"?"#042743":"white"}}>Your text Summary</h2>
